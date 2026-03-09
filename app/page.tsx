@@ -51,11 +51,11 @@ export default async function HomePage() {
           <span className="eyebrow-chip">Hemly Marketplace</span>
           <h1 className="section-title text-4xl sm:text-6xl">
             {pick(locale, {
-              sv: "Hitta ditt nästa hem med tydlighet.",
-              ar: "اعثر على منزلك القادم بوضوح.",
-              fi: "Löydä seuraava kotisi selkeästi.",
-              bcs: "Pronađi svoj sljedeći dom s jasnoćom.",
-              en: "Find your next home with clarity."
+              sv: "Hitta hem. Enkelt.",
+              ar: "اعثر على منزلك. ببساطة.",
+              fi: "Löydä koti. Selkeästi.",
+              bcs: "Pronađi dom. Jednostavno.",
+              en: "Find home. Clearly."
             })}
           </h1>
           <p className="max-w-3xl text-base text-[var(--muted)] sm:text-xl">
