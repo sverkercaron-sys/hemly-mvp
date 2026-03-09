@@ -8,6 +8,10 @@ function toNumber(value: string) {
   return Number.isFinite(parsed) && parsed > 0 ? parsed : undefined;
 }
 
+function Label({ children }: { children: React.ReactNode }) {
+  return <label className="space-y-1 text-xs font-bold uppercase tracking-wide text-slate-500">{children}</label>;
+}
+
 export function SearchFilters() {
   const params = useSearchParams();
   const router = useRouter();
@@ -31,68 +35,72 @@ export function SearchFilters() {
   }
 
   return (
-    <form action={onSubmit} className="card grid gap-3 p-4 md:grid-cols-4">
-      <select name="city" defaultValue={params.get("city") ?? ""} className="rounded-xl border p-2">
-        <option value="">City</option>
-        {CITIES.map((city) => (
-          <option key={city} value={city}>
-            {city}
-          </option>
-        ))}
-      </select>
-      <input name="area" placeholder="Area" defaultValue={params.get("area") ?? ""} className="rounded-xl border p-2" />
-      <input
-        name="priceMin"
-        type="number"
-        placeholder="Price min"
-        defaultValue={params.get("priceMin") ?? ""}
-        className="rounded-xl border p-2"
-      />
-      <input
-        name="priceMax"
-        type="number"
-        placeholder="Price max"
-        defaultValue={params.get("priceMax") ?? ""}
-        className="rounded-xl border p-2"
-      />
-      <input
-        name="monthlyCostMax"
-        type="number"
-        placeholder="Monthly cost max"
-        defaultValue={params.get("monthlyCostMax") ?? ""}
-        className="rounded-xl border p-2"
-      />
-      <input
-        name="roomsMin"
-        type="number"
-        min={1}
-        step={0.5}
-        placeholder="Rooms min"
-        defaultValue={params.get("roomsMin") ?? ""}
-        className="rounded-xl border p-2"
-      />
-      <input
-        name="sizeMin"
-        type="number"
-        placeholder="Size min (sqm)"
-        defaultValue={params.get("sizeMin") ?? ""}
-        className="rounded-xl border p-2"
-      />
-      <select name="propertyType" defaultValue={params.get("propertyType") ?? ""} className="rounded-xl border p-2">
-        <option value="">Property type</option>
-        {PROPERTY_TYPES.map((type) => (
-          <option key={type} value={type}>
-            {type}
-          </option>
-        ))}
-      </select>
-      <select name="sortBy" defaultValue={params.get("sortBy") ?? "newest"} className="rounded-xl border p-2">
-        <option value="newest">Newest</option>
-        <option value="priceAsc">Price ascending</option>
-        <option value="priceDesc">Price descending</option>
-      </select>
-      <button type="submit" className="button-primary">
-        Search
+    <form action={onSubmit} className="card grid gap-4 p-4 md:grid-cols-4">
+      <Label>
+        City
+        <select name="city" defaultValue={params.get("city") ?? ""} className="input-shell">
+          <option value="">Any city</option>
+          {CITIES.map((city) => (
+            <option key={city} value={city}>
+              {city}
+            </option>
+          ))}
+        </select>
+      </Label>
+
+      <Label>
+        Area
+        <input name="area" placeholder="Any area" defaultValue={params.get("area") ?? ""} className="input-shell" />
+      </Label>
+
+      <Label>
+        Price min
+        <input name="priceMin" type="number" placeholder="0" defaultValue={params.get("priceMin") ?? ""} className="input-shell" />
+      </Label>
+
+      <Label>
+        Price max
+        <input name="priceMax" type="number" placeholder="No max" defaultValue={params.get("priceMax") ?? ""} className="input-shell" />
+      </Label>
+
+      <Label>
+        Monthly cost max
+        <input name="monthlyCostMax" type="number" placeholder="No max" defaultValue={params.get("monthlyCostMax") ?? ""} className="input-shell" />
+      </Label>
+
+      <Label>
+        Rooms min
+        <input name="roomsMin" type="number" min={1} step={0.5} placeholder="1" defaultValue={params.get("roomsMin") ?? ""} className="input-shell" />
+      </Label>
+
+      <Label>
+        Size min (sqm)
+        <input name="sizeMin" type="number" placeholder="20" defaultValue={params.get("sizeMin") ?? ""} className="input-shell" />
+      </Label>
+
+      <Label>
+        Property type
+        <select name="propertyType" defaultValue={params.get("propertyType") ?? ""} className="input-shell">
+          <option value="">Any type</option>
+          {PROPERTY_TYPES.map((type) => (
+            <option key={type} value={type}>
+              {type}
+            </option>
+          ))}
+        </select>
+      </Label>
+
+      <Label>
+        Sort by
+        <select name="sortBy" defaultValue={params.get("sortBy") ?? "newest"} className="input-shell">
+          <option value="newest">Newest</option>
+          <option value="priceAsc">Price ascending</option>
+          <option value="priceDesc">Price descending</option>
+        </select>
+      </Label>
+
+      <button type="submit" className="button-primary md:col-span-1 md:self-end">
+        Search homes
       </button>
     </form>
   );

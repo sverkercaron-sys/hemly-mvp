@@ -12,20 +12,23 @@ export function MortgageCalculator({ homePrice, monthlyFee }: { homePrice: numbe
   }, [homePrice, monthlyFee, interestRate, years]);
 
   return (
-    <section className="card space-y-4 p-4">
-      <h3 className="text-lg font-semibold">Mortgage calculator</h3>
-      <p className="text-sm text-slate-600">Price {formatSEK(homePrice)} with monthly fee {formatSEK(monthlyFee)}</p>
+    <section className="card space-y-4 p-5">
+      <p className="kicker">Mortgage</p>
+      <h3 className="text-xl font-black" style={{ fontFamily: "var(--font-display)" }}>
+        Monthly estimate calculator
+      </h3>
+      <p className="text-sm text-slate-600">Price {formatSEK(homePrice)} and monthly fee {formatSEK(monthlyFee)}</p>
       <div className="grid gap-3 sm:grid-cols-2">
-        <label className="space-y-1 text-sm">
-          <span>Interest rate (%)</span>
-          <input type="number" step="0.1" value={interestRate} onChange={(e) => setInterestRate(Number(e.target.value))} className="w-full rounded-xl border p-2" />
+        <label className="space-y-1 text-sm font-semibold text-slate-700">
+          Interest rate (%)
+          <input type="number" step="0.1" value={interestRate} onChange={(e) => setInterestRate(Number(e.target.value))} className="input-shell" />
         </label>
-        <label className="space-y-1 text-sm">
-          <span>Amortization years</span>
-          <input type="number" min={5} max={50} value={years} onChange={(e) => setYears(Number(e.target.value))} className="w-full rounded-xl border p-2" />
+        <label className="space-y-1 text-sm font-semibold text-slate-700">
+          Amortization years
+          <input type="number" min={5} max={50} value={years} onChange={(e) => setYears(Number(e.target.value))} className="input-shell" />
         </label>
       </div>
-      <p className="text-base font-semibold text-teal-700">{formatMonthly(monthly)}</p>
+      <p className="text-base font-bold text-teal-800">{formatMonthly(monthly)}</p>
     </section>
   );
 }

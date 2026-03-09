@@ -1,42 +1,103 @@
 @import "tailwindcss";
 
 :root {
-  --brand-bg: #f4f6f8;
-  --brand-card: #ffffff;
-  --brand-primary: #0f766e;
-  --brand-primary-dark: #115e59;
-  --brand-text: #0f172a;
-  --brand-muted: #475569;
-  --brand-border: #dbe3ea;
+  --font-body: "Manrope", "Avenir Next", "Segoe UI", "Helvetica Neue", sans-serif;
+  --font-display: "Space Grotesk", "Satoshi", "Avenir Next", "Segoe UI", sans-serif;
+  --bg: #f6f4ed;
+  --bg-soft: #efece2;
+  --ink: #111827;
+  --muted: #546274;
+  --card: #ffffff;
+  --line: #dbe4dd;
+  --brand: #0f766e;
+  --brand-strong: #0b5c56;
+  --accent: #d4efe6;
+  --danger: #9f1239;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {
-  background: radial-gradient(circle at top, #d7f2ec 0%, #f4f6f8 40%, #f4f6f8 100%);
-  color: var(--brand-text);
-  min-height: 100vh;
+  margin: 0;
+  font-family: var(--font-body);
+  background:
+    radial-gradient(circle at 15% 5%, #d7efe6 0%, transparent 35%),
+    radial-gradient(circle at 90% 0%, #efe9da 0%, transparent 30%),
+    var(--bg);
+  color: var(--ink);
+}
+
+a {
+  color: inherit;
 }
 
 .card {
-  @apply rounded-2xl border bg-white shadow-sm;
-  border-color: var(--brand-border);
+  @apply rounded-3xl border shadow-sm;
+  border-color: var(--line);
+  background: var(--card);
+}
+
+.page-shell {
+  @apply mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 lg:px-8;
+}
+
+.section-title {
+  @apply text-3xl font-black tracking-tight sm:text-4xl;
+}
+
+.kicker {
+  @apply text-xs font-bold uppercase tracking-[0.18em];
+  color: var(--brand);
+}
+
+.input-shell {
+  @apply w-full rounded-xl border bg-white px-3 py-2 text-sm outline-none transition;
+  border-color: var(--line);
+}
+
+.input-shell:focus {
+  border-color: #7fb7ac;
+  box-shadow: 0 0 0 3px rgba(16, 117, 108, 0.12);
 }
 
 .button-primary {
-  @apply inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm font-semibold text-white transition;
-  background: var(--brand-primary);
+  @apply inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm font-bold text-white transition;
+  background: var(--brand);
 }
 
 .button-primary:hover {
-  background: var(--brand-primary-dark);
+  background: var(--brand-strong);
 }
 
 .button-secondary {
-  @apply inline-flex items-center justify-center rounded-xl border px-4 py-2 text-sm font-semibold transition;
-  border-color: var(--brand-border);
-  color: var(--brand-text);
-  background: white;
+  @apply inline-flex items-center justify-center rounded-xl border bg-white px-4 py-2 text-sm font-semibold transition;
+  border-color: var(--line);
 }
 
 .button-secondary:hover {
-  @apply bg-slate-50;
+  background: #f8faf8;
+}
+
+.stat-chip {
+  @apply rounded-2xl border px-4 py-3;
+  border-color: #cfe2da;
+  background: #f7fcfa;
+}
+
+.soft-panel {
+  @apply rounded-3xl border;
+  border-color: #d8e5de;
+  background: linear-gradient(180deg, #f7fcfa 0%, #eef7f2 100%);
+}
+
+.hero-grid {
+  @apply grid gap-4 md:grid-cols-2;
+}
+
+@media (max-width: 768px) {
+  .card {
+    @apply rounded-2xl;
+  }
 }

@@ -19,30 +19,35 @@ export function AffordabilityWizard() {
   }, [income, savings]);
 
   return (
-    <section className="card max-w-2xl space-y-4 p-6">
-      <h1 className="text-2xl font-bold">What can I afford?</h1>
+    <section className="card mx-auto max-w-3xl space-y-5 p-6 sm:p-8">
+      <p className="kicker">Affordability tool</p>
+      <h1 className="section-title" style={{ fontFamily: "var(--font-display)" }}>
+        See what you can afford
+      </h1>
       <p className="text-sm text-slate-600">Step {step} of 3</p>
 
       {step === 1 ? (
-        <label className="space-y-2 text-sm">
-          <span>Monthly income (SEK)</span>
-          <input type="number" className="w-full rounded-xl border p-2" value={income} onChange={(e) => setIncome(Number(e.target.value))} />
+        <label className="space-y-2 text-sm font-semibold text-slate-700">
+          Monthly income (SEK)
+          <input type="number" className="input-shell" value={income} onChange={(e) => setIncome(Number(e.target.value))} />
         </label>
       ) : null}
 
       {step === 2 ? (
-        <label className="space-y-2 text-sm">
-          <span>Savings for down payment (SEK)</span>
-          <input type="number" className="w-full rounded-xl border p-2" value={savings} onChange={(e) => setSavings(Number(e.target.value))} />
+        <label className="space-y-2 text-sm font-semibold text-slate-700">
+          Savings for down payment (SEK)
+          <input type="number" className="input-shell" value={savings} onChange={(e) => setSavings(Number(e.target.value))} />
         </label>
       ) : null}
 
       {step === 3 ? (
-        <div className="space-y-2 rounded-xl bg-teal-50 p-4">
-          <p className="text-sm text-slate-700">Estimated maximum home price</p>
-          <p className="text-3xl font-bold text-teal-800">{formatSEK(result.maxHomePrice)}</p>
-          <p className="text-sm font-medium text-slate-700">Estimated monthly payment {formatMonthly(result.monthlyPayment)}</p>
-          <div className="flex gap-2 text-sm">
+        <div className="soft-panel space-y-3 p-5">
+          <p className="text-sm font-semibold text-slate-700">Estimated maximum home price</p>
+          <p className="text-4xl font-black text-teal-900" style={{ fontFamily: "var(--font-display)" }}>
+            {formatSEK(result.maxHomePrice)}
+          </p>
+          <p className="text-sm font-semibold text-slate-700">Estimated monthly payment {formatMonthly(result.monthlyPayment)}</p>
+          <div className="flex flex-wrap gap-2 text-sm">
             <a className="button-primary" href={`/bostader?priceMax=${result.maxHomePrice}`}>
               Search by price
             </a>

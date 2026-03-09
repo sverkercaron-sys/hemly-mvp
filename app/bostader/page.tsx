@@ -45,9 +45,17 @@ export default async function ListingsPage({ searchParams }: PageProps) {
   });
 
   return (
-    <section className="space-y-4">
-      <h1 className="text-3xl font-bold">Homes for sale</h1>
+    <section className="space-y-5">
+      <div className="soft-panel p-6 sm:p-8">
+        <p className="kicker">Marketplace Search</p>
+        <h1 className="section-title mt-1" style={{ fontFamily: "var(--font-display)" }}>
+          Homes for sale
+        </h1>
+        <p className="mt-2 max-w-3xl text-slate-600">Search across city, area, size, rooms, price, and monthly cost. All listings are moderation-approved.</p>
+      </div>
+
       <SearchFilters />
+
       {result.data.length === 0 ? (
         <EmptyState text="No homes matched your current filters." />
       ) : (
@@ -57,7 +65,8 @@ export default async function ListingsPage({ searchParams }: PageProps) {
               <PropertyCard key={property.id} property={property} />
             ))}
           </div>
-          <div className="flex items-center justify-between">
+
+          <div className="card flex flex-col items-start justify-between gap-3 p-4 sm:flex-row sm:items-center">
             <p className="text-sm text-slate-600">
               Page {result.page} / {totalPages} ({result.count} homes)
             </p>
