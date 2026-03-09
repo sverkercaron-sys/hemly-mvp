@@ -36,7 +36,7 @@ export default async function PropertyPage({ params }: Props) {
 
   const images = property.images?.length
     ? property.images
-    : [{ id: "fallback", property_id: property.id, url: "https://picsum.photos/seed/hemly-fallback-detail/1600/1000", image_order: 0 }];
+    : [{ id: "fallback", property_id: property.id, url: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600", image_order: 0 }];
 
   return (
     <section className="space-y-4">
