@@ -5,6 +5,7 @@ import { LeadForm } from "@/components/lead-form";
 import { MortgageCalculator } from "@/components/mortgage-calculator";
 import { getPropertyBySlug } from "@/lib/queries/properties";
 import { formatMonthly, formatSEK } from "@/lib/utils";
+import { getServerLocale, pick } from "@/lib/i18n";
 
 export const dynamic = "force-dynamic";
 export const dynamicParams = true;
@@ -30,6 +31,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function PropertyPage({ params }: Props) {
+  const locale = await getServerLocale();
   const { slug } = await params;
   const property = await getPropertyBySlug(slug);
   if (!property) notFound();
@@ -64,16 +66,16 @@ export default async function PropertyPage({ params }: Props) {
           <section className="card space-y-4 p-5">
             <div className="grid gap-2 text-sm text-[var(--muted)] sm:grid-cols-2">
               <p>
-                <span className="font-semibold text-[#1d1d1f]">Monthly fee:</span> {formatSEK(property.monthly_fee)}
+                <span className="font-semibold text-[#1d1d1f]">{pick(locale, { sv: "Månadsavgift", ar: "الرسوم الشهرية", fi: "Kuukausimaksu", bcs: "Mjesečna naknada", en: "Monthly fee" })}:</span> {formatSEK(property.monthly_fee)}
               </p>
               <p>
-                <span className="font-semibold text-[#1d1d1f]">Rooms:</span> {property.rooms}
+                <span className="font-semibold text-[#1d1d1f]">{pick(locale, { sv: "Rum", ar: "الغرف", fi: "Huoneet", bcs: "Sobe", en: "Rooms" })}:</span> {property.rooms}
               </p>
               <p>
-                <span className="font-semibold text-[#1d1d1f]">Size:</span> {property.size} sqm
+                <span className="font-semibold text-[#1d1d1f]">{pick(locale, { sv: "Storlek", ar: "المساحة", fi: "Koko", bcs: "Veličina", en: "Size" })}:</span> {property.size} sqm
               </p>
               <p>
-                <span className="font-semibold text-[#1d1d1f]">Address:</span> {property.address}
+                <span className="font-semibold text-[#1d1d1f]">{pick(locale, { sv: "Adress", ar: "العنوان", fi: "Osoite", bcs: "Adresa", en: "Address" })}:</span> {property.address}
               </p>
             </div>
             <p className="text-[#1d1d1f]">{property.description}</p>

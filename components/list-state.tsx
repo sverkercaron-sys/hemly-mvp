@@ -1,4 +1,4 @@
-export function LoadingState({ text = "Loading..." }: { text?: string }) {
+export function LoadingState({ text = "Laddar..." }: { text?: string }) {
   return <div className="card p-6 text-sm font-semibold text-slate-600">{text}</div>;
 }
 

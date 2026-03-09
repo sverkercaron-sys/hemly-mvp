@@ -3,6 +3,7 @@ import { EmptyState } from "@/components/list-state";
 import { PropertyCard } from "@/components/property-card";
 import { SearchFilters } from "@/components/search-filters";
 import { getProperties } from "@/lib/queries/properties";
+import { getServerLocale, pick } from "@/lib/i18n";
 
 interface PageProps {
   searchParams: Promise<Record<string, string | string[] | undefined>>;
@@ -20,6 +21,7 @@ function parseString(value: string | string[] | undefined) {
 }
 
 export default async function ListingsPage({ searchParams }: PageProps) {
+  const locale = await getServerLocale();
   const params = await searchParams;
   const page = parseNum(params.page) ?? 1;
 
@@ -47,14 +49,14 @@ export default async function ListingsPage({ searchParams }: PageProps) {
   return (
     <section className="space-y-5">
       <div className="soft-panel p-6 sm:p-8">
-        <p className="kicker">Marketplace Search</p>
-        <h1 className="section-title mt-1">Homes for sale</h1>
+        <p className="kicker">{pick(locale, { sv: "Sök", ar: "بحث", fi: "Haku", bcs: "Pretraga", en: "Search" })}</p>
+        <h1 className="section-title mt-1">{pick(locale, { sv: "Bostäder till salu", ar: "منازل للبيع", fi: "Kodit myynnissä", bcs: "Nekretnine na prodaju", en: "Homes for sale" })}</h1>
       </div>
 
       <SearchFilters />
 
       {result.data.length === 0 ? (
-        <EmptyState text="No homes matched your current filters." />
+        <EmptyState text={pick(locale, { sv: "Inga bostäder matchade filtren.", ar: "لا توجد نتائج مطابقة.", fi: "Ei osumia suodattimilla.", bcs: "Nema rezultata za ove filtere.", en: "No homes matched your current filters." })} />
       ) : (
         <>
           <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
@@ -65,7 +67,7 @@ export default async function ListingsPage({ searchParams }: PageProps) {
 
           <div className="card flex flex-col items-start justify-between gap-3 p-4 sm:flex-row sm:items-center">
             <p className="text-sm text-[var(--muted)]">
-              Page {result.page} / {totalPages} ({result.count} homes)
+              {pick(locale, { sv: "Sida", ar: "الصفحة", fi: "Sivu", bcs: "Stranica", en: "Page" })} {result.page} / {totalPages} ({result.count})
             </p>
             <div className="flex gap-2">
               <Link
@@ -73,14 +75,14 @@ export default async function ListingsPage({ searchParams }: PageProps) {
                 aria-disabled={result.page <= 1}
                 href={`/bostader?${new URLSearchParams({ ...Object.fromEntries(base.entries()), page: String(Math.max(1, result.page - 1)) }).toString()}`}
               >
-                Prev
+                {pick(locale, { sv: "Föregående", ar: "السابق", fi: "Edellinen", bcs: "Prethodno", en: "Prev" })}
               </Link>
               <Link
                 className="button-secondary"
                 aria-disabled={result.page >= totalPages}
                 href={`/bostader?${new URLSearchParams({ ...Object.fromEntries(base.entries()), page: String(Math.min(totalPages, result.page + 1)) }).toString()}`}
               >
-                Next
+                {pick(locale, { sv: "Nästa", ar: "التالي", fi: "Seuraava", bcs: "Sljedeće", en: "Next" })}
               </Link>
             </div>
           </div>

@@ -1,16 +1,23 @@
 import Image from "next/image";
 import Link from "next/link";
+import { LanguageSwitcher } from "@/components/language-switcher";
+import { getServerLocale, pick } from "@/lib/i18n";
 
-const links = [
-  { href: "/bostader", label: "Homes" },
-  { href: "/map", label: "Map" },
-  { href: "/affordability", label: "Affordability" },
-  { href: "/favorites", label: "Favorites" },
-  { href: "/dashboard/agent", label: "Agent" },
-  { href: "/dashboard/admin", label: "Admin" }
-];
+export async function SiteHeader() {
+  const locale = await getServerLocale();
 
-export function SiteHeader() {
+  const links = [
+    { href: "/bostader", label: pick(locale, { sv: "Bostäder", ar: "المنازل", fi: "Kodit", bcs: "Nekretnine", en: "Homes" }) },
+    { href: "/map", label: pick(locale, { sv: "Karta", ar: "الخريطة", fi: "Kartta", bcs: "Mapa", en: "Map" }) },
+    {
+      href: "/affordability",
+      label: pick(locale, { sv: "Boendekalkyl", ar: "القدرة الشرائية", fi: "Budjetti", bcs: "Pristupačnost", en: "Affordability" })
+    },
+    { href: "/favorites", label: pick(locale, { sv: "Favoriter", ar: "المفضلة", fi: "Suosikit", bcs: "Favoriti", en: "Favorites" }) },
+    { href: "/dashboard/agent", label: pick(locale, { sv: "Mäklare", ar: "الوكيل", fi: "Välittäjä", bcs: "Agent", en: "Agent" }) },
+    { href: "/dashboard/admin", label: pick(locale, { sv: "Admin", ar: "المشرف", fi: "Ylläpito", bcs: "Admin", en: "Admin" }) }
+  ];
+
   return (
     <header className="sticky top-0 z-30 border-b border-[#ececf1] bg-white/88 backdrop-blur-2xl">
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-8">
@@ -29,18 +36,19 @@ export function SiteHeader() {
           ))}
         </nav>
 
-        <div className="hidden md:block">
+        <div className="hidden items-center gap-3 md:flex">
+          <LanguageSwitcher />
           <Link href="/dashboard/agent" className="button-primary">
-            Add Listing
+            {pick(locale, { sv: "Lägg till annons", ar: "أضف إعلان", fi: "Lisää ilmoitus", bcs: "Dodaj oglas", en: "Add Listing" })}
           </Link>
         </div>
 
         <nav className="flex items-center gap-2 text-xs font-semibold md:hidden">
           <Link href="/bostader" className="button-secondary px-3 py-1.5">
-            Homes
+            {pick(locale, { sv: "Bostäder", ar: "المنازل", fi: "Kodit", bcs: "Nekretnine", en: "Homes" })}
           </Link>
           <Link href="/map" className="button-secondary px-3 py-1.5">
-            Map
+            {pick(locale, { sv: "Karta", ar: "الخريطة", fi: "Kartta", bcs: "Mapa", en: "Map" })}
           </Link>
         </nav>
       </div>

@@ -7,6 +7,8 @@ import type { CircleLayer, SymbolLayer } from "react-map-gl";
 import type { FeatureCollection, Point } from "geojson";
 import { Property } from "@/lib/types";
 import { formatSEK } from "@/lib/utils";
+import { pick } from "@/lib/i18n";
+import { useLocale } from "@/hooks/use-locale";
 
 const clusterLayer: CircleLayer = {
   id: "clusters",
@@ -37,6 +39,7 @@ const clusterCountLayer: SymbolLayer = {
 export function MapView({ properties }: { properties: Property[] }) {
   const [selected, setSelected] = useState<Property | null>(null);
   const token = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
+  const locale = useLocale();
 
   const geoJson = useMemo<FeatureCollection<Point, { id: string; title: string }>>(
     () => ({
@@ -54,16 +57,12 @@ export function MapView({ properties }: { properties: Property[] }) {
   );
 
   if (!token) {
-    return <p className="card p-6 text-sm text-[var(--muted)]">Mapbox token missing. Set `NEXT_PUBLIC_MAPBOX_TOKEN`.</p>;
+    return <p className="card p-6 text-sm text-[var(--muted)]">{pick(locale, { sv: "Mapbox-token saknas.", ar: "رمز Mapbox مفقود.", fi: "Mapbox-token puuttuu.", bcs: "Nedostaje Mapbox token.", en: "Mapbox token is missing." })}</p>;
   }
 
   return (
     <div className="card h-[70vh] overflow-hidden">
-      <Map
-        initialViewState={{ longitude: 18.06, latitude: 59.33, zoom: 4.8 }}
-        mapStyle="mapbox://styles/mapbox/streets-v12"
-        mapboxAccessToken={token}
-      >
+      <Map initialViewState={{ longitude: 18.06, latitude: 59.33, zoom: 4.8 }} mapStyle="mapbox://styles/mapbox/streets-v12" mapboxAccessToken={token}>
         <Source id="properties" type="geojson" data={geoJson} cluster clusterMaxZoom={14} clusterRadius={50}>
           <Layer {...clusterLayer} />
           <Layer {...clusterCountLayer} />

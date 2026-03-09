@@ -3,8 +3,10 @@ import Link from "next/link";
 import { Property } from "@/lib/types";
 import { formatMonthly, formatSEK } from "@/lib/utils";
 import { toOptimizedImageUrl } from "@/lib/images";
+import { getServerLocale, pick } from "@/lib/i18n";
 
-export function PropertyCard({ property }: { property: Property }) {
+export async function PropertyCard({ property }: { property: Property }) {
+  const locale = await getServerLocale();
   const cover = toOptimizedImageUrl(property.images?.[0]?.url ?? "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1200", 900, 65);
 
   return (
@@ -21,7 +23,7 @@ export function PropertyCard({ property }: { property: Property }) {
         <h3 className="line-clamp-1 text-[1.85rem] font-semibold leading-tight tracking-tight text-[#1d1d1f]">{property.title}</h3>
 
         <p className="text-sm text-[var(--muted)]">
-          {property.rooms} rooms - {property.size} sqm
+          {property.rooms} {pick(locale, { sv: "rum", ar: "غرف", fi: "huonetta", bcs: "soba", en: "rooms" })} - {property.size} sqm
         </p>
 
         <div className="space-y-1">
@@ -30,7 +32,7 @@ export function PropertyCard({ property }: { property: Property }) {
         </div>
 
         <Link href={`/bostad/${property.slug}`} className="button-secondary w-full">
-          View property
+          {pick(locale, { sv: "Visa bostad", ar: "عرض العقار", fi: "Näytä kohde", bcs: "Pogledaj", en: "View property" })}
         </Link>
       </div>
     </article>

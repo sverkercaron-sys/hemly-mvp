@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { pick } from "@/lib/i18n";
+import { useLocale } from "@/hooks/use-locale";
 
 interface Profile {
   id: string;
@@ -12,6 +14,7 @@ interface Profile {
 export function SearchProfilesPanel() {
   const [profiles, setProfiles] = useState<Profile[]>([]);
   const [status, setStatus] = useState("");
+  const locale = useLocale();
 
   async function load() {
     const res = await fetch("/api/search-profiles");
@@ -26,7 +29,7 @@ export function SearchProfilesPanel() {
   }, []);
 
   async function onCreate(formData: FormData) {
-    setStatus("Saving...");
+    setStatus(pick(locale, { sv: "Sparar...", ar: "جارٍ الحفظ...", fi: "Tallennetaan...", bcs: "Spremanje...", en: "Saving..." }));
     const res = await fetch("/api/search-profiles", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -37,28 +40,28 @@ export function SearchProfilesPanel() {
       })
     });
 
-    setStatus(res.ok ? "Saved" : "Could not save");
+    setStatus(res.ok ? pick(locale, { sv: "Sparat", ar: "تم الحفظ", fi: "Tallennettu", bcs: "Sačuvano", en: "Saved" }) : pick(locale, { sv: "Kunde inte spara", ar: "تعذر الحفظ", fi: "Tallennus epäonnistui", bcs: "Nije sačuvano", en: "Could not save" }));
     if (res.ok) load();
   }
 
   return (
     <section className="space-y-3">
       <form action={onCreate} className="card grid gap-2 p-4 md:grid-cols-4">
-        <input name="city" placeholder="City" className="rounded-xl border p-2" required />
-        <input name="price_max" type="number" placeholder="Price max" className="rounded-xl border p-2" />
-        <input name="monthly_cost_max" type="number" placeholder="Monthly max" className="rounded-xl border p-2" />
-        <button className="button-primary">Save alert profile</button>
+        <input name="city" placeholder={pick(locale, { sv: "Stad", ar: "المدينة", fi: "Kaupunki", bcs: "Grad", en: "City" })} className="rounded-xl border p-2" required />
+        <input name="price_max" type="number" placeholder={pick(locale, { sv: "Pris max", ar: "أعلى سعر", fi: "Hinta max", bcs: "Max cijena", en: "Price max" })} className="rounded-xl border p-2" />
+        <input name="monthly_cost_max" type="number" placeholder={pick(locale, { sv: "Månad max", ar: "الشهرية max", fi: "Kuukausi max", bcs: "Mjesečno max", en: "Monthly max" })} className="rounded-xl border p-2" />
+        <button className="button-primary">{pick(locale, { sv: "Spara bevakning", ar: "حفظ التنبيه", fi: "Tallenna hälytys", bcs: "Sačuvaj alarm", en: "Save alert profile" })}</button>
       </form>
       {status ? <p className="text-sm text-slate-600">{status}</p> : null}
       <div className="space-y-2">
         {profiles.map((profile) => (
           <article key={profile.id} className="card p-3 text-sm">
             <p className="font-semibold">{profile.city}</p>
-            <p className="text-slate-600">Price max: {profile.price_max ?? "-"}</p>
-            <p className="text-slate-600">Monthly max: {profile.monthly_cost_max ?? "-"}</p>
+            <p className="text-slate-600">{pick(locale, { sv: "Pris max", ar: "أعلى سعر", fi: "Hinta max", bcs: "Max cijena", en: "Price max" })}: {profile.price_max ?? "-"}</p>
+            <p className="text-slate-600">{pick(locale, { sv: "Månad max", ar: "الشهرية max", fi: "Kuukausi max", bcs: "Mjesečno max", en: "Monthly max" })}: {profile.monthly_cost_max ?? "-"}</p>
           </article>
         ))}
-        {profiles.length === 0 ? <p className="card p-4 text-sm text-slate-600">No search profiles yet.</p> : null}
+        {profiles.length === 0 ? <p className="card p-4 text-sm text-slate-600">{pick(locale, { sv: "Inga sökprofiler än.", ar: "لا توجد ملفات بحث بعد.", fi: "Ei hakuprofiileja vielä.", bcs: "Još nema profila pretrage.", en: "No search profiles yet." })}</p> : null}
       </div>
     </section>
   );
