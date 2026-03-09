@@ -49,7 +49,6 @@ export default async function ListingsPage({ searchParams }: PageProps) {
       <div className="soft-panel p-6 sm:p-8">
         <p className="kicker">Marketplace Search</p>
         <h1 className="section-title mt-1">Homes for sale</h1>
-        <p className="mt-2 max-w-3xl text-[var(--muted)]">Refined search by city, area, rooms, size, price and monthly affordability.</p>
       </div>
 
       <SearchFilters />

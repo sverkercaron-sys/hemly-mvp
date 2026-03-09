@@ -12,22 +12,15 @@ const links = [
 
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-30 border-b border-[#e6dccd]/90 bg-[#f7f3ed]/95 backdrop-blur-xl">
+    <header className="sticky top-0 z-30 border-b border-[#ececf1] bg-white/88 backdrop-blur-2xl">
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-8">
         <Link href="/" className="inline-flex items-center">
-          <Image
-            src="/brand/hemly-wordmark-transparent-dark.svg"
-            alt="Hemly"
-            width={150}
-            height={44}
-            className="h-9 w-auto"
-            priority
-          />
+          <Image src="/brand/hemly-wordmark-transparent-dark.svg" alt="Hemly" width={168} height={44} className="h-10 w-auto" priority />
         </Link>
 
-        <nav className="hidden items-center gap-1 text-sm font-semibold text-[#322c27] md:flex">
+        <nav className="hidden items-center gap-1 text-sm font-semibold text-[#1d1d1f] md:flex">
           {links.map((link) => (
-            <Link key={link.href} href={link.href} className="rounded-lg px-3 py-1.5 transition hover:bg-[#efe6da]">
+            <Link key={link.href} href={link.href} className="rounded-lg px-3 py-1.5 transition hover:bg-[#f3f3f6]">
               {link.label}
             </Link>
           ))}

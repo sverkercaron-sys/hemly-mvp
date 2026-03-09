@@ -46,10 +46,8 @@ export default async function PropertyPage({ params }: Props) {
         </p>
         <h1 className="section-title mt-1">{property.title}</h1>
         <div className="mt-3 flex flex-wrap gap-5">
-          <p className="text-5xl font-bold" style={{ fontFamily: "var(--font-display)" }}>
-            {formatSEK(property.price)}
-          </p>
-          <p className="text-lg font-semibold text-[var(--muted)]">{formatMonthly(property.monthly_cost_estimate)}</p>
+          <p className="text-5xl font-semibold tracking-tight text-[#1d1d1f]">{formatSEK(property.price)}</p>
+          <p className="text-lg font-medium text-[var(--muted)]">{formatMonthly(property.monthly_cost_estimate)}</p>
         </div>
       </div>
 
@@ -66,19 +64,19 @@ export default async function PropertyPage({ params }: Props) {
           <section className="card space-y-4 p-5">
             <div className="grid gap-2 text-sm text-[var(--muted)] sm:grid-cols-2">
               <p>
-                <span className="font-semibold text-[#2f2722]">Monthly fee:</span> {formatSEK(property.monthly_fee)}
+                <span className="font-semibold text-[#1d1d1f]">Monthly fee:</span> {formatSEK(property.monthly_fee)}
               </p>
               <p>
-                <span className="font-semibold text-[#2f2722]">Rooms:</span> {property.rooms}
+                <span className="font-semibold text-[#1d1d1f]">Rooms:</span> {property.rooms}
               </p>
               <p>
-                <span className="font-semibold text-[#2f2722]">Size:</span> {property.size} sqm
+                <span className="font-semibold text-[#1d1d1f]">Size:</span> {property.size} sqm
               </p>
               <p>
-                <span className="font-semibold text-[#2f2722]">Address:</span> {property.address}
+                <span className="font-semibold text-[#1d1d1f]">Address:</span> {property.address}
               </p>
             </div>
-            <p className="text-[#2f2722]">{property.description}</p>
+            <p className="text-[#1d1d1f]">{property.description}</p>
           </section>
 
           <MortgageCalculator homePrice={property.price} monthlyFee={property.monthly_fee} />

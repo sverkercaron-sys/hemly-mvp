@@ -1,15 +1,16 @@
 @import "tailwindcss";
 
 :root {
-  --ink: #1a1714;
-  --sand: #f7f3ed;
+  --ink: #111111;
+  --soft-ink: #1d1d1f;
+  --muted: #6e6e73;
+  --bg: #f5f5f7;
+  --card: #ffffff;
+  --line: #e5e5ea;
   --terra: #c4522a;
-  --line: #e5ddd1;
-  --card: #fffdfa;
-  --muted: #5f5a54;
-  --focus: rgba(196, 82, 42, 0.22);
+  --focus: rgba(196, 82, 42, 0.24);
   --font-body: "Inter", "Avenir Next", "Segoe UI", "Helvetica Neue", sans-serif;
-  --font-display: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+  --font-display: "SF Pro Display", "Inter", "Avenir Next", "Segoe UI", sans-serif;
 }
 
 * {
@@ -20,10 +21,7 @@ body {
   margin: 0;
   color: var(--ink);
   font-family: var(--font-body);
-  background:
-    radial-gradient(1200px 500px at 95% -10%, #f0e2d6 0%, transparent 55%),
-    radial-gradient(1000px 420px at -10% 0%, #efe3d5 0%, transparent 50%),
-    var(--sand);
+  background: radial-gradient(1200px 600px at 50% -30%, #ffffff 0%, var(--bg) 60%);
 }
 
 a {
@@ -42,18 +40,19 @@ a {
 
 .soft-panel {
   @apply rounded-3xl border;
-  border-color: #e1d7ca;
-  background: linear-gradient(180deg, #fffdfa 0%, #f9f5ef 100%);
+  border-color: #e8e8ed;
+  background: linear-gradient(180deg, #ffffff 0%, #fbfbfd 100%);
 }
 
 .section-title {
-  @apply text-3xl font-bold tracking-tight sm:text-5xl;
+  @apply text-3xl font-semibold tracking-tight sm:text-5xl;
   font-family: var(--font-display);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.035em;
+  color: var(--soft-ink);
 }
 
 .kicker {
-  @apply text-xs font-bold uppercase tracking-[0.18em];
+  @apply text-xs font-semibold uppercase tracking-[0.16em];
   color: var(--terra);
 }
 
@@ -63,17 +62,17 @@ a {
 }
 
 .input-shell:focus {
-  border-color: #cc7a5d;
+  border-color: #cd7e63;
   box-shadow: 0 0 0 3px var(--focus);
 }
 
 .button-primary {
   @apply inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm font-semibold text-white transition;
-  background: var(--ink);
+  background: #1d1d1f;
 }
 
 .button-primary:hover {
-  background: #090807;
+  background: #000;
 }
 
 .button-secondary {
@@ -83,14 +82,14 @@ a {
 }
 
 .button-secondary:hover {
-  background: #f8f4ee;
+  background: #f8f8fa;
 }
 
 .eyebrow-chip {
-  @apply inline-flex items-center rounded-full border px-2 py-1 text-xs font-bold;
-  border-color: #d8cabb;
-  background: #fffaf4;
-  color: #6c4e3d;
+  @apply inline-flex items-center rounded-full border px-2 py-1 text-xs font-semibold;
+  border-color: #e8d5cc;
+  background: #fff;
+  color: #8c3f23;
 }
 
 @media (max-width: 768px) {
