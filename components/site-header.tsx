@@ -15,15 +15,10 @@ export function SiteHeader() {
     <header className="sticky top-0 z-30 border-b border-[#ececf1] bg-white/88 backdrop-blur-2xl">
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-8">
         <Link href="/" className="inline-flex items-center gap-2">
-          <Image src="/brand/hemly-icon-ink.svg" alt="Hemly icon" width={36} height={36} className="h-9 w-9 rounded-lg" priority />
-          <Image
-            src="/brand/hemly-wordmark-transparent-dark.svg"
-            alt="Hemly"
-            width={196}
-            height={58}
-            className="h-11 w-auto"
-            priority
-          />
+          <span className="text-[2rem] font-semibold leading-none tracking-tight text-[#1d1d1f]" style={{ fontFamily: "var(--font-display)" }}>
+            Hemly
+          </span>
+          <Image src="/brand/hemly-pin-terra.svg" alt="Hemly pin" width={18} height={24} className="h-5 w-auto" priority />
         </Link>
 
         <nav className="hidden items-center gap-1 text-sm font-semibold text-[#1d1d1f] md:flex">
