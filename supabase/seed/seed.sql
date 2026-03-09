@@ -80,13 +80,6 @@ with generated as (
 insert into public.property_images (property_id, url, image_order)
 select
   i.id,
-  (array[
-    '/images/listings/house-1.svg',
-    '/images/listings/house-2.svg',
-    '/images/listings/house-3.svg',
-    '/images/listings/house-4.svg',
-    '/images/listings/house-5.svg',
-    '/images/listings/house-6.svg'
-  ])[1 + (random() * 5)::int],
+  format('https://picsum.photos/seed/hemly-sql-%s/1200/800', row_number() over (order by i.id)),
   0
 from inserted i;

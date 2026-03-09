@@ -9,15 +9,6 @@ const descriptions = [
   "Calm street location with strong neighborhood amenities."
 ];
 
-const images = [
-  "/images/listings/house-1.svg",
-  "/images/listings/house-2.svg",
-  "/images/listings/house-3.svg",
-  "/images/listings/house-4.svg",
-  "/images/listings/house-5.svg",
-  "/images/listings/house-6.svg"
-];
-
 function random(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -66,7 +57,7 @@ async function main() {
   if (data?.length) {
     const imageRows = data.map((item, idx) => ({
       property_id: item.id,
-      url: images[idx % images.length],
+      url: `https://picsum.photos/seed/hemly-${idx + 1}/1200/800`,
       image_order: 0
     }));
 
