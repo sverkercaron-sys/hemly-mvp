@@ -3,9 +3,11 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { LeadForm } from "@/components/lead-form";
 import { MortgageCalculator } from "@/components/mortgage-calculator";
-import { createPublicClient } from "@/lib/supabase/public";
 import { getPropertyBySlug } from "@/lib/queries/properties";
 import { formatMonthly, formatSEK } from "@/lib/utils";
+
+export const dynamic = "force-dynamic";
+export const dynamicParams = true;
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -25,16 +27,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `${property.title} | Hemly`,
     description: `${property.city}, ${property.area}. ${formatSEK(property.price)}.`
   };
-}
-
-export async function generateStaticParams() {
-  try {
-    const supabase = createPublicClient();
-    const { data } = await supabase.from("properties").select("slug").eq("status", "approved").limit(500);
-    return (data ?? []).map((row) => ({ slug: row.slug }));
-  } catch {
-    return [];
-  }
 }
 
 export default async function PropertyPage({ params }: Props) {
