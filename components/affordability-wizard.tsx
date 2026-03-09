@@ -21,20 +21,18 @@ export function AffordabilityWizard() {
   return (
     <section className="card mx-auto max-w-3xl space-y-5 p-6 sm:p-8">
       <p className="kicker">Affordability tool</p>
-      <h1 className="section-title" style={{ fontFamily: "var(--font-display)" }}>
-        See what you can afford
-      </h1>
-      <p className="text-sm text-slate-600">Step {step} of 3</p>
+      <h1 className="section-title">See what you can afford</h1>
+      <p className="text-sm text-[var(--muted)]">Step {step} of 3</p>
 
       {step === 1 ? (
-        <label className="space-y-2 text-sm font-semibold text-slate-700">
+        <label className="space-y-2 text-sm font-semibold text-[#3b322c]">
           Monthly income (SEK)
           <input type="number" className="input-shell" value={income} onChange={(e) => setIncome(Number(e.target.value))} />
         </label>
       ) : null}
 
       {step === 2 ? (
-        <label className="space-y-2 text-sm font-semibold text-slate-700">
+        <label className="space-y-2 text-sm font-semibold text-[#3b322c]">
           Savings for down payment (SEK)
           <input type="number" className="input-shell" value={savings} onChange={(e) => setSavings(Number(e.target.value))} />
         </label>
@@ -42,11 +40,11 @@ export function AffordabilityWizard() {
 
       {step === 3 ? (
         <div className="soft-panel space-y-3 p-5">
-          <p className="text-sm font-semibold text-slate-700">Estimated maximum home price</p>
-          <p className="text-4xl font-black text-teal-900" style={{ fontFamily: "var(--font-display)" }}>
+          <p className="text-sm font-semibold text-[var(--muted)]">Estimated maximum home price</p>
+          <p className="text-5xl font-bold text-[#231d19]" style={{ fontFamily: "var(--font-display)" }}>
             {formatSEK(result.maxHomePrice)}
           </p>
-          <p className="text-sm font-semibold text-slate-700">Estimated monthly payment {formatMonthly(result.monthlyPayment)}</p>
+          <p className="text-sm font-semibold text-[var(--muted)]">Estimated monthly payment {formatMonthly(result.monthlyPayment)}</p>
           <div className="flex flex-wrap gap-2 text-sm">
             <a className="button-primary" href={`/bostader?priceMax=${result.maxHomePrice}`}>
               Search by price

@@ -15,10 +15,8 @@ export default async function MapPage() {
     <section className="space-y-4">
       <div className="soft-panel p-6 sm:p-8">
         <p className="kicker">Map search</p>
-        <h1 className="section-title mt-1" style={{ fontFamily: "var(--font-display)" }}>
-          Explore homes on the map
-        </h1>
-        <p className="mt-2 text-slate-600">Zoom, cluster, and compare locations with live price markers.</p>
+        <h1 className="section-title mt-1">Explore homes on the map</h1>
+        <p className="mt-2 text-[var(--muted)]">Zoom, cluster, and compare locations with live price markers.</p>
       </div>
       <MapView properties={properties} />
     </section>

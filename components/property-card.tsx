@@ -9,28 +9,29 @@ export function PropertyCard({ property }: { property: Property }) {
 
   return (
     <article className="card overflow-hidden transition hover:-translate-y-0.5 hover:shadow-md">
-      <div className="relative h-52 w-full">
+      <div className="relative h-56 w-full">
         <Image src={cover} alt={property.title} fill className="object-cover" loading="lazy" />
         <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/55 to-transparent p-3">
-          <p className="inline-flex rounded-full bg-white/95 px-2 py-1 text-xs font-bold text-slate-900">
+          <p className="inline-flex rounded-full bg-white/95 px-2 py-1 text-xs font-semibold text-[#382e27]">
             {property.city} - {property.area}
           </p>
         </div>
       </div>
 
       <div className="space-y-3 p-5">
-        <h3 className="line-clamp-1 text-4xl font-black leading-tight text-slate-900" style={{ fontFamily: "var(--font-display)", fontSize: "clamp(1.4rem, 2.4vw, 2rem)" }}>
+        <h3 className="line-clamp-1 text-[1.95rem] font-bold leading-tight" style={{ fontFamily: "var(--font-display)" }}>
           {property.title}
         </h3>
-        <p className="text-sm text-slate-600">
+
+        <p className="text-sm text-[var(--muted)]">
           {property.rooms} rooms - {property.size} sqm
         </p>
 
-        <div>
-          <p className="text-4xl font-black leading-none" style={{ fontFamily: "var(--font-display)", fontSize: "clamp(1.8rem, 3vw, 2.5rem)" }}>
+        <div className="space-y-1">
+          <p className="text-[2.6rem] font-bold leading-none" style={{ fontFamily: "var(--font-display)" }}>
             {formatSEK(property.price)}
           </p>
-          <p className="mt-1 text-base font-semibold text-slate-600">{formatMonthly(property.monthly_cost_estimate)}</p>
+          <p className="text-base font-semibold text-[var(--muted)]">{formatMonthly(property.monthly_cost_estimate)}</p>
         </div>
 
         <Link href={`/bostad/${property.slug}`} className="button-secondary w-full">

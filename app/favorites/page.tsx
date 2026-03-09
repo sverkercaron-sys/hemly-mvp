@@ -5,9 +5,7 @@ export default function FavoritesPage() {
     <section className="space-y-4">
       <div className="soft-panel p-6">
         <p className="kicker">Saved homes</p>
-        <h1 className="section-title mt-1" style={{ fontFamily: "var(--font-display)" }}>
-          Favorites
-        </h1>
+        <h1 className="section-title mt-1">Favorites</h1>
       </div>
       <FavoritesPanel />
     </section>

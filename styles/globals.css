@@ -1,18 +1,15 @@
 @import "tailwindcss";
 
 :root {
-  --font-body: "Manrope", "Avenir Next", "Segoe UI", "Helvetica Neue", sans-serif;
-  --font-display: "Space Grotesk", "Satoshi", "Avenir Next", "Segoe UI", sans-serif;
-  --bg: #f6f4ed;
-  --bg-soft: #efece2;
-  --ink: #111827;
-  --muted: #546274;
-  --card: #ffffff;
-  --line: #dbe4dd;
-  --brand: #0f766e;
-  --brand-strong: #0b5c56;
-  --accent: #d4efe6;
-  --danger: #9f1239;
+  --ink: #1a1714;
+  --sand: #f7f3ed;
+  --terra: #c4522a;
+  --line: #e5ddd1;
+  --card: #fffdfa;
+  --muted: #5f5a54;
+  --focus: rgba(196, 82, 42, 0.22);
+  --font-body: "Inter", "Avenir Next", "Segoe UI", "Helvetica Neue", sans-serif;
+  --font-display: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
 }
 
 * {
@@ -21,16 +18,20 @@
 
 body {
   margin: 0;
+  color: var(--ink);
   font-family: var(--font-body);
   background:
-    radial-gradient(circle at 15% 5%, #d7efe6 0%, transparent 35%),
-    radial-gradient(circle at 90% 0%, #efe9da 0%, transparent 30%),
-    var(--bg);
-  color: var(--ink);
+    radial-gradient(1200px 500px at 95% -10%, #f0e2d6 0%, transparent 55%),
+    radial-gradient(1000px 420px at -10% 0%, #efe3d5 0%, transparent 50%),
+    var(--sand);
 }
 
 a {
   color: inherit;
+}
+
+.page-shell {
+  @apply mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 lg:px-8;
 }
 
 .card {
@@ -39,17 +40,21 @@ a {
   background: var(--card);
 }
 
-.page-shell {
-  @apply mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 lg:px-8;
+.soft-panel {
+  @apply rounded-3xl border;
+  border-color: #e1d7ca;
+  background: linear-gradient(180deg, #fffdfa 0%, #f9f5ef 100%);
 }
 
 .section-title {
-  @apply text-3xl font-black tracking-tight sm:text-4xl;
+  @apply text-3xl font-bold tracking-tight sm:text-5xl;
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
 }
 
 .kicker {
   @apply text-xs font-bold uppercase tracking-[0.18em];
-  color: var(--brand);
+  color: var(--terra);
 }
 
 .input-shell {
@@ -58,46 +63,39 @@ a {
 }
 
 .input-shell:focus {
-  border-color: #7fb7ac;
-  box-shadow: 0 0 0 3px rgba(16, 117, 108, 0.12);
+  border-color: #cc7a5d;
+  box-shadow: 0 0 0 3px var(--focus);
 }
 
 .button-primary {
-  @apply inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm font-bold text-white transition;
-  background: var(--brand);
+  @apply inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm font-semibold text-white transition;
+  background: var(--ink);
 }
 
 .button-primary:hover {
-  background: var(--brand-strong);
+  background: #090807;
 }
 
 .button-secondary {
-  @apply inline-flex items-center justify-center rounded-xl border bg-white px-4 py-2 text-sm font-semibold transition;
+  @apply inline-flex items-center justify-center rounded-xl border px-4 py-2 text-sm font-semibold transition;
   border-color: var(--line);
+  background: #fff;
 }
 
 .button-secondary:hover {
-  background: #f8faf8;
+  background: #f8f4ee;
 }
 
-.stat-chip {
-  @apply rounded-2xl border px-4 py-3;
-  border-color: #cfe2da;
-  background: #f7fcfa;
-}
-
-.soft-panel {
-  @apply rounded-3xl border;
-  border-color: #d8e5de;
-  background: linear-gradient(180deg, #f7fcfa 0%, #eef7f2 100%);
-}
-
-.hero-grid {
-  @apply grid gap-4 md:grid-cols-2;
+.eyebrow-chip {
+  @apply inline-flex items-center rounded-full border px-2 py-1 text-xs font-bold;
+  border-color: #d8cabb;
+  background: #fffaf4;
+  color: #6c4e3d;
 }
 
 @media (max-width: 768px) {
-  .card {
+  .card,
+  .soft-panel {
     @apply rounded-2xl;
   }
 }

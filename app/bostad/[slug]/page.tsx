@@ -44,14 +44,12 @@ export default async function PropertyPage({ params }: Props) {
         <p className="kicker">
           {property.city} - {property.area}
         </p>
-        <h1 className="section-title mt-1" style={{ fontFamily: "var(--font-display)" }}>
-          {property.title}
-        </h1>
+        <h1 className="section-title mt-1">{property.title}</h1>
         <div className="mt-3 flex flex-wrap gap-5">
-          <p className="text-4xl font-black" style={{ fontFamily: "var(--font-display)" }}>
+          <p className="text-5xl font-bold" style={{ fontFamily: "var(--font-display)" }}>
             {formatSEK(property.price)}
           </p>
-          <p className="text-lg font-bold text-slate-700">{formatMonthly(property.monthly_cost_estimate)}</p>
+          <p className="text-lg font-semibold text-[var(--muted)]">{formatMonthly(property.monthly_cost_estimate)}</p>
         </div>
       </div>
 
@@ -66,21 +64,21 @@ export default async function PropertyPage({ params }: Props) {
       <div className="grid gap-4 lg:grid-cols-[2fr_1fr]">
         <div className="space-y-4">
           <section className="card space-y-4 p-5">
-            <div className="grid gap-2 text-sm text-slate-700 sm:grid-cols-2">
+            <div className="grid gap-2 text-sm text-[var(--muted)] sm:grid-cols-2">
               <p>
-                <span className="font-semibold">Monthly fee:</span> {formatSEK(property.monthly_fee)}
+                <span className="font-semibold text-[#2f2722]">Monthly fee:</span> {formatSEK(property.monthly_fee)}
               </p>
               <p>
-                <span className="font-semibold">Rooms:</span> {property.rooms}
+                <span className="font-semibold text-[#2f2722]">Rooms:</span> {property.rooms}
               </p>
               <p>
-                <span className="font-semibold">Size:</span> {property.size} sqm
+                <span className="font-semibold text-[#2f2722]">Size:</span> {property.size} sqm
               </p>
               <p>
-                <span className="font-semibold">Address:</span> {property.address}
+                <span className="font-semibold text-[#2f2722]">Address:</span> {property.address}
               </p>
             </div>
-            <p className="text-slate-700">{property.description}</p>
+            <p className="text-[#2f2722]">{property.description}</p>
           </section>
 
           <MortgageCalculator homePrice={property.price} monthlyFee={property.monthly_fee} />

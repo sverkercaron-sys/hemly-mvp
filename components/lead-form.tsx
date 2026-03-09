@@ -25,7 +25,7 @@ export function LeadForm({ propertyId }: { propertyId: string }) {
   return (
     <form action={onSubmit} className="card h-fit space-y-3 p-5">
       <p className="kicker">Direct contact</p>
-      <h3 className="text-xl font-black" style={{ fontFamily: "var(--font-display)" }}>
+      <h3 className="text-2xl font-bold" style={{ fontFamily: "var(--font-display)" }}>
         Contact agent
       </h3>
       <input name="email" type="email" required placeholder="Your email" className="input-shell" />
@@ -33,7 +33,7 @@ export function LeadForm({ propertyId }: { propertyId: string }) {
       <button className="button-primary w-full" type="submit">
         Send inquiry
       </button>
-      {status ? <p className="text-sm text-slate-600">{status}</p> : null}
+      {status ? <p className="text-sm text-[var(--muted)]">{status}</p> : null}
     </form>
   );
 }

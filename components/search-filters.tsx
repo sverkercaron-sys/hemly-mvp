@@ -9,7 +9,7 @@ function toNumber(value: string) {
 }
 
 function Label({ children }: { children: React.ReactNode }) {
-  return <label className="space-y-1 text-xs font-bold uppercase tracking-wide text-slate-500">{children}</label>;
+  return <label className="space-y-1 text-xs font-bold uppercase tracking-wide text-[#6a5647]">{children}</label>;
 }
 
 export function SearchFilters() {
@@ -99,7 +99,7 @@ export function SearchFilters() {
         </select>
       </Label>
 
-      <button type="submit" className="button-primary md:col-span-1 md:self-end">
+      <button type="submit" className="button-primary md:self-end">
         Search homes
       </button>
     </form>

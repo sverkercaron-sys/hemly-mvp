@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+    <rect width="512" height="512" rx="113" fill="#F7F3ED"/>
+    <text x="92" y="369"
+      font-family="Georgia, 'Times New Roman', serif"
+      font-size="266" font-weight="700"
+      fill="#1A1714">H</text>
+    <g transform="translate(276, 41)">
+      <path d="M54 0C24.192 0 0 24.167 0 54.054C0 94.52300000000001 54 143 54 143C54 143 108 94.52300000000001 108 54.054C108 24.167 83.808 0 54 0Z" fill="#C4522A"/>
+      <circle cx="54" cy="54.054" r="20.878" fill="#F7F3ED"/>
+    </g>
+  </svg>

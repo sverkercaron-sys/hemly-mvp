@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 298 88" width="298" height="88">
+    <rect width="298" height="88" fill="#1A1714"/>
+    <text x="0" y="72"
+      font-family="Georgia, 'Times New Roman', serif"
+      font-size="80" font-weight="700"
+      fill="#FFFFFF">Hemly</text>
+    <path d="M243 2
+      C232.512 2 224 10.450000000000001 224 20.9
+      C224 35.050000000000004 243 52 243 52
+      C243 52 262 35.050000000000004 262 20.9
+      C262 10.450000000000001 253.488 2 243 2Z"
+      fill="#FFFFFF"/>
+    <circle cx="243" cy="20.9" r="7.3" fill="#C4522A"/>
+  </svg>

@@ -48,10 +48,8 @@ export default async function ListingsPage({ searchParams }: PageProps) {
     <section className="space-y-5">
       <div className="soft-panel p-6 sm:p-8">
         <p className="kicker">Marketplace Search</p>
-        <h1 className="section-title mt-1" style={{ fontFamily: "var(--font-display)" }}>
-          Homes for sale
-        </h1>
-        <p className="mt-2 max-w-3xl text-slate-600">Search across city, area, size, rooms, price, and monthly cost. All listings are moderation-approved.</p>
+        <h1 className="section-title mt-1">Homes for sale</h1>
+        <p className="mt-2 max-w-3xl text-[var(--muted)]">Refined search by city, area, rooms, size, price and monthly affordability.</p>
       </div>
 
       <SearchFilters />
@@ -67,7 +65,7 @@ export default async function ListingsPage({ searchParams }: PageProps) {
           </div>
 
           <div className="card flex flex-col items-start justify-between gap-3 p-4 sm:flex-row sm:items-center">
-            <p className="text-sm text-slate-600">
+            <p className="text-sm text-[var(--muted)]">
               Page {result.page} / {totalPages} ({result.count} homes)
             </p>
             <div className="flex gap-2">
