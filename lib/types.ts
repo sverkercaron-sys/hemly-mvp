@@ -8,6 +8,7 @@ export interface Property {
   description: string;
   price: number;
   monthly_fee: number;
+  operating_cost: number;
   size: number;
   rooms: number;
   property_type: PropertyType;

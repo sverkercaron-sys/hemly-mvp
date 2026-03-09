@@ -12,13 +12,13 @@ export function formatMonthly(value: number) {
   return "≈ " + new Intl.NumberFormat("sv-SE", { maximumFractionDigits: 0 }).format(value) + " kr / month";
 }
 
-export function estimateMonthlyCost(price: number, monthlyFee = 0, interestRate = 0.04, years = 30) {
+export function estimateMonthlyCost(price: number, monthlyFee = 0, interestRate = 0.04, years = 30, operatingCost = 0) {
   const principal = price * 0.85;
   const monthlyRate = interestRate / 12;
   const totalMonths = years * 12;
   const mortgageCost =
     (principal * monthlyRate * Math.pow(1 + monthlyRate, totalMonths)) / (Math.pow(1 + monthlyRate, totalMonths) - 1);
-  return Math.round(mortgageCost + monthlyFee);
+  return Math.round(mortgageCost + monthlyFee + operatingCost);
 }
 
 export function slugify(value: string) {

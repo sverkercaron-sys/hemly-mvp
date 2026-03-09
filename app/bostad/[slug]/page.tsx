@@ -69,6 +69,9 @@ export default async function PropertyPage({ params }: Props) {
                 <span className="font-semibold text-[#1d1d1f]">{pick(locale, { sv: "Månadsavgift", ar: "الرسوم الشهرية", fi: "Kuukausimaksu", bcs: "Mjesečna naknada", en: "Monthly fee" })}:</span> {formatSEK(property.monthly_fee)}
               </p>
               <p>
+                <span className="font-semibold text-[#1d1d1f]">{pick(locale, { sv: "Driftskostnad", ar: "تكلفة التشغيل", fi: "Käyttökulut", bcs: "Trošak održavanja", en: "Operating cost" })}:</span> {formatSEK(property.operating_cost ?? 0)}
+              </p>
+              <p>
                 <span className="font-semibold text-[#1d1d1f]">{pick(locale, { sv: "Rum", ar: "الغرف", fi: "Huoneet", bcs: "Sobe", en: "Rooms" })}:</span> {property.rooms}
               </p>
               <p>
@@ -81,7 +84,7 @@ export default async function PropertyPage({ params }: Props) {
             <p className="text-[#1d1d1f]">{property.description}</p>
           </section>
 
-          <MortgageCalculator homePrice={property.price} monthlyFee={property.monthly_fee} />
+          <MortgageCalculator homePrice={property.price} monthlyFee={property.monthly_fee} operatingCost={property.operating_cost ?? 0} />
         </div>
 
         <LeadForm propertyId={property.id} />

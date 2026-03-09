@@ -25,6 +25,7 @@ with generated as (
     case when gs % 4 = 0 then 18.06 when gs % 4 = 1 then 11.97 when gs % 4 = 2 then 13.00 else 17.64 end + ((random() - 0.5) * 0.07) as lng,
     (2800000 + (random() * 7200000)::int) as price,
     (1800 + (random() * 6800)::int) as monthly_fee,
+    (600 + (random() * 3600)::int) as operating_cost,
     (35 + (random() * 175)::int) as size,
     round((1 + random() * 6)::numeric, 1) as rooms,
     (array['villa','apartment','townhouse','cottage'])[1 + (gs % 4)]::property_type as property_type,
@@ -41,6 +42,7 @@ with generated as (
     description,
     price,
     monthly_fee,
+    operating_cost,
     size,
     rooms,
     property_type,
@@ -60,6 +62,7 @@ with generated as (
     description,
     price,
     monthly_fee,
+    operating_cost,
     size,
     rooms,
     property_type,
@@ -72,7 +75,7 @@ with generated as (
     lower(replace(format('%s-%s-%s', city, area, n), ' ', '-')),
     (array['11111111-1111-1111-1111-111111111111','22222222-2222-2222-2222-222222222222','33333333-3333-3333-3333-333333333333'])[1 + (n % 3)]::uuid,
     'approved'::listing_status,
-    round((price * 0.0035 + monthly_fee)::numeric)::int
+    round((price * 0.0035 + monthly_fee + operating_cost)::numeric)::int
   from generated
   on conflict (slug) do nothing
   returning id

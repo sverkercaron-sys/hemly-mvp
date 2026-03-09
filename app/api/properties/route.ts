@@ -51,7 +51,7 @@ export async function POST(req: NextRequest) {
       longitude: 18.06,
       year_built: null,
       agent_id: agentRow?.id ?? null,
-      monthly_cost_estimate: estimateMonthlyCost(propertyValues.price, propertyValues.monthly_fee)
+      monthly_cost_estimate: estimateMonthlyCost(propertyValues.price, propertyValues.monthly_fee, 0.04, 30, propertyValues.operating_cost)
     })
     .select("id")
     .single();

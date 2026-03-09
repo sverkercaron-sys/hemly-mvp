@@ -33,6 +33,7 @@ async function main() {
     const area = areas[i % areas.length];
     const price = random(2_300_000, 11_800_000);
     const monthlyFee = random(1500, 8500);
+    const operatingCost = random(600, 4200);
     const size = random(28, 210);
     const rooms = Number((Math.random() * 5.5 + 1).toFixed(1));
     const type = (["apartment", "villa", "townhouse", "cottage"] as const)[i % 4];
@@ -43,6 +44,7 @@ async function main() {
       description: descriptions[i % descriptions.length],
       price,
       monthly_fee: monthlyFee,
+      operating_cost: operatingCost,
       size,
       rooms,
       property_type: type,
@@ -54,7 +56,7 @@ async function main() {
       longitude: city === "Stockholm" ? 18.06 + Math.random() * 0.07 : city === "Göteborg" ? 11.97 + Math.random() * 0.07 : city === "Malmö" ? 13.0 + Math.random() * 0.07 : 17.64 + Math.random() * 0.07,
       slug,
       status: "approved",
-      monthly_cost_estimate: estimateMonthlyCost(price, monthlyFee)
+      monthly_cost_estimate: estimateMonthlyCost(price, monthlyFee, 0.04, 30, operatingCost)
     };
   });
 

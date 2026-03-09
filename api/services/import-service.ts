@@ -7,6 +7,7 @@ export interface NormalizedListing {
   description: string;
   price: number;
   monthly_fee: number;
+  operating_cost: number;
   size: number;
   rooms: number;
   property_type: ExternalListing["propertyType"];
@@ -29,6 +30,7 @@ export async function ingestViaAdapter(adapter: ListingIntegrationAdapter, input
     description: item.description,
     price: item.price,
     monthly_fee: item.monthlyFee,
+    operating_cost: item.operatingCost ?? 0,
     size: item.size,
     rooms: item.rooms,
     property_type: item.propertyType,
@@ -38,7 +40,7 @@ export async function ingestViaAdapter(adapter: ListingIntegrationAdapter, input
     latitude: item.latitude ?? 59.33,
     longitude: item.longitude ?? 18.06,
     slug: `${slugify(item.city)}-${slugify(item.area)}-${slugify(item.title)}-${item.externalId}`,
-    monthly_cost_estimate: estimateMonthlyCost(item.price, item.monthlyFee),
+    monthly_cost_estimate: estimateMonthlyCost(item.price, item.monthlyFee, 0.04, 30, item.operatingCost ?? 0),
     images: item.images ?? []
   }));
 }

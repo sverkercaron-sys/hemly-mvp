@@ -5,6 +5,7 @@ export const createPropertySchema = z.object({
   description: z.string().min(20),
   price: z.number().positive(),
   monthly_fee: z.number().nonnegative(),
+  operating_cost: z.number().nonnegative(),
   size: z.number().positive(),
   rooms: z.number().positive(),
   property_type: z.enum(["villa", "apartment", "townhouse", "cottage"]),

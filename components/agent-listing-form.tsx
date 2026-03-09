@@ -18,6 +18,7 @@ export function AgentListingForm() {
         title: String(formData.get("title") ?? ""),
         price: Number(formData.get("price") ?? 0),
         monthly_fee: Number(formData.get("monthly_fee") ?? 0),
+        operating_cost: Number(formData.get("operating_cost") ?? 0),
         size: Number(formData.get("size") ?? 0),
         rooms: Number(formData.get("rooms") ?? 0),
         description: String(formData.get("description") ?? ""),
@@ -40,6 +41,7 @@ export function AgentListingForm() {
       <input className="rounded-xl border p-2" name="title" placeholder={pick(locale, { sv: "Rubrik", ar: "العنوان", fi: "Otsikko", bcs: "Naslov", en: "Title" })} required />
       <input className="rounded-xl border p-2" name="price" type="number" placeholder={pick(locale, { sv: "Pris", ar: "السعر", fi: "Hinta", bcs: "Cijena", en: "Price" })} required />
       <input className="rounded-xl border p-2" name="monthly_fee" type="number" placeholder={pick(locale, { sv: "Månadsavgift", ar: "الرسوم الشهرية", fi: "Kuukausimaksu", bcs: "Mjesečna naknada", en: "Monthly fee" })} required />
+      <input className="rounded-xl border p-2" name="operating_cost" type="number" placeholder={pick(locale, { sv: "Driftskostnad / mån", ar: "تكلفة التشغيل / شهر", fi: "Käyttökulu / kk", bcs: "Trošak održavanja / mj", en: "Operating cost / month" })} required />
       <input className="rounded-xl border p-2" name="size" type="number" placeholder={pick(locale, { sv: "Storlek", ar: "المساحة", fi: "Koko", bcs: "Veličina", en: "Size" })} required />
       <input className="rounded-xl border p-2" name="rooms" type="number" placeholder={pick(locale, { sv: "Rum", ar: "الغرف", fi: "Huoneet", bcs: "Sobe", en: "Rooms" })} required />
       <input className="rounded-xl border p-2" name="property_type" placeholder={pick(locale, { sv: "Bostadstyp", ar: "نوع السكن", fi: "Asuntotyyppi", bcs: "Tip", en: "Property type" })} defaultValue="apartment" required />

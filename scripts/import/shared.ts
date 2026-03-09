@@ -26,6 +26,7 @@ export async function persistImport(source: string, adapter: ListingIntegrationA
           description: item.description,
           price: item.price,
           monthly_fee: item.monthly_fee,
+          operating_cost: item.operating_cost,
           size: item.size,
           rooms: item.rooms,
           property_type: item.property_type,

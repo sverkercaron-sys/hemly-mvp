@@ -11,6 +11,7 @@ export class XmlAdapter implements ListingIntegrationAdapter {
       description: String(row.description ?? ""),
       price: Number(row.price ?? 0),
       monthlyFee: Number(row.monthlyFee ?? row.monthly_fee ?? 0),
+      operatingCost: Number(row.operatingCost ?? row.operating_cost ?? 0),
       size: Number(row.size ?? 0),
       rooms: Number(row.rooms ?? 0),
       propertyType: (row.propertyType ?? "apartment") as ExternalListing["propertyType"],

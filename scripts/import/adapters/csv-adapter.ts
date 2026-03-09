@@ -11,6 +11,7 @@ export class CsvAdapter implements ListingIntegrationAdapter {
       description: String(row.description ?? ""),
       price: Number(row.price ?? 0),
       monthlyFee: Number(row.monthly_fee ?? 0),
+      operatingCost: Number(row.operating_cost ?? 0),
       size: Number(row.size ?? 0),
       rooms: Number(row.rooms ?? 0),
       propertyType: (row.property_type ?? "apartment") as ExternalListing["propertyType"],

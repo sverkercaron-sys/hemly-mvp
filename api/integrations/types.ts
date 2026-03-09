@@ -4,6 +4,7 @@ export interface ExternalListing {
   description: string;
   price: number;
   monthlyFee: number;
+  operatingCost?: number;
   size: number;
   rooms: number;
   propertyType: "villa" | "apartment" | "townhouse" | "cottage";
