@@ -54,4 +54,5 @@ export interface SearchProfile {
   price_min: number | null;
   price_max: number | null;
   monthly_cost_max: number | null;
+  is_default: boolean;
 }

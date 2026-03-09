@@ -26,3 +26,10 @@ export const createSearchProfileSchema = z.object({
   price_max: z.number().positive().nullable(),
   monthly_cost_max: z.number().positive().nullable()
 });
+
+export const updateProfileSchema = z.object({
+  language: z.enum(["sv", "ar", "fi", "bcs", "en"]).optional(),
+  monthly_income: z.number().int().nonnegative().nullable().optional(),
+  savings: z.number().int().nonnegative().nullable().optional(),
+  preferred_down_payment: z.number().int().nonnegative().nullable().optional()
+});

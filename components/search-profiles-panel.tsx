@@ -9,6 +9,7 @@ interface Profile {
   city: string;
   price_max: number | null;
   monthly_cost_max: number | null;
+  is_default: boolean;
 }
 
 export function SearchProfilesPanel() {
@@ -44,6 +45,21 @@ export function SearchProfilesPanel() {
     if (res.ok) load();
   }
 
+  async function onSetDefault(profileId: string) {
+    const res = await fetch("/api/search-profiles", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ profile_id: profileId, set_default: true })
+    });
+
+    setStatus(
+      res.ok
+        ? pick(locale, { sv: "Standardsökprofil uppdaterad", ar: "تم تحديث ملف البحث الافتراضي", fi: "Oletushakuprofiili päivitetty", bcs: "Podrazumijevani profil ažuriran", en: "Default profile updated" })
+        : pick(locale, { sv: "Kunde inte uppdatera standardprofil", ar: "تعذر تحديث الملف الافتراضي", fi: "Oletusprofiilin päivitys epäonnistui", bcs: "Ažuriranje nije uspjelo", en: "Could not update default profile" })
+    );
+    if (res.ok) load();
+  }
+
   return (
     <section className="space-y-3">
       <form action={onCreate} className="card grid gap-2 p-4 md:grid-cols-4">
@@ -56,7 +72,18 @@ export function SearchProfilesPanel() {
       <div className="space-y-2">
         {profiles.map((profile) => (
           <article key={profile.id} className="card p-3 text-sm">
-            <p className="font-semibold">{profile.city}</p>
+            <div className="flex items-center justify-between gap-2">
+              <p className="font-semibold">{profile.city}</p>
+              {profile.is_default ? (
+                <span className="rounded-full bg-[#eef4ff] px-2 py-1 text-xs font-semibold text-[#274690]">
+                  {pick(locale, { sv: "Standard", ar: "افتراضي", fi: "Oletus", bcs: "Podrazumijevano", en: "Default" })}
+                </span>
+              ) : (
+                <button type="button" className="button-secondary px-3 py-1 text-xs" onClick={() => onSetDefault(profile.id)}>
+                  {pick(locale, { sv: "Sätt som standard", ar: "اجعله افتراضيًا", fi: "Aseta oletukseksi", bcs: "Postavi kao zadano", en: "Set as default" })}
+                </button>
+              )}
+            </div>
             <p className="text-slate-600">{pick(locale, { sv: "Pris max", ar: "أعلى سعر", fi: "Hinta max", bcs: "Max cijena", en: "Price max" })}: {profile.price_max ?? "-"}</p>
             <p className="text-slate-600">{pick(locale, { sv: "Månad max", ar: "الشهرية max", fi: "Kuukausi max", bcs: "Mjesečno max", en: "Monthly max" })}: {profile.monthly_cost_max ?? "-"}</p>
           </article>

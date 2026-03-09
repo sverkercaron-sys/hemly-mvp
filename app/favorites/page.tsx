@@ -1,7 +1,12 @@
 import { FavoritesPanel } from "@/components/favorites-panel";
 import { getServerLocale, pick } from "@/lib/i18n";
+import { getAuthContext } from "@/lib/auth";
+import { redirect } from "next/navigation";
 
 export default async function FavoritesPage() {
+  const { user } = await getAuthContext();
+  if (!user) redirect("/auth");
+
   const locale = await getServerLocale();
   return (
     <section className="space-y-4">

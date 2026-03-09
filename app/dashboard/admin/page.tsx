@@ -1,8 +1,13 @@
 import { AdminModerationPanel } from "@/components/admin-moderation-panel";
 import { AdminImportsPanel } from "@/components/admin-imports-panel";
 import { getServerLocale, pick } from "@/lib/i18n";
+import { getAuthContext } from "@/lib/auth";
+import { redirect } from "next/navigation";
 
 export default async function AdminDashboardPage() {
+  const { role } = await getAuthContext();
+  if (role !== "admin") redirect("/auth");
+
   const locale = await getServerLocale();
   return (
     <section className="space-y-4">

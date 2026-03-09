@@ -1,7 +1,17 @@
 import { AgentListingForm } from "@/components/agent-listing-form";
 import { getServerLocale, pick } from "@/lib/i18n";
+import { getAuthContext } from "@/lib/auth";
+import { redirect } from "next/navigation";
 
 export default async function AgentDashboardPage() {
+  const { supabase, user, role } = await getAuthContext();
+  if (!user) redirect("/auth");
+
+  if (role !== "admin") {
+    const { data: agent } = await supabase.from("agents").select("id").eq("email", user.email ?? "").maybeSingle();
+    if (!agent?.id) redirect("/auth");
+  }
+
   const locale = await getServerLocale();
   return (
     <section className="space-y-4">

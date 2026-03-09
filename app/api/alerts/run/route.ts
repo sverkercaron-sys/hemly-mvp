@@ -1,8 +1,9 @@
 import { NextResponse } from "next/server";
-import { createClient } from "@/lib/supabase/server";
+import { getAuthContext } from "@/lib/auth";
 
 export async function POST() {
-  const supabase = await createClient();
+  const { supabase, role } = await getAuthContext();
+  if (role !== "admin") return NextResponse.json({ error: "Forbidden" }, { status: 403 });
 
   const [{ data: profiles }, { data: latestProperties }] = await Promise.all([
     supabase.from("search_profiles").select("*").limit(500),

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { LanguageSwitcher } from "@/components/language-switcher";
+import { AuthControls } from "@/components/auth-controls";
 import { getServerLocale, pick } from "@/lib/i18n";
 
 export async function SiteHeader() {
@@ -38,6 +39,7 @@ export async function SiteHeader() {
 
         <div className="hidden items-center gap-3 md:flex">
           <LanguageSwitcher />
+          <AuthControls />
           <Link href="/dashboard/agent" className="button-primary">
             {pick(locale, { sv: "Lägg till annons", ar: "أضف إعلان", fi: "Lisää ilmoitus", bcs: "Dodaj oglas", en: "Add Listing" })}
           </Link>
@@ -49,6 +51,9 @@ export async function SiteHeader() {
           </Link>
           <Link href="/map" className="button-secondary px-3 py-1.5">
             {pick(locale, { sv: "Karta", ar: "الخريطة", fi: "Kartta", bcs: "Mapa", en: "Map" })}
+          </Link>
+          <Link href="/auth" className="button-secondary px-3 py-1.5">
+            {pick(locale, { sv: "Login", ar: "دخول", fi: "Login", bcs: "Login", en: "Login" })}
           </Link>
         </nav>
       </div>

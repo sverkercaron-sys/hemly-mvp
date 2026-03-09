@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { formatMonthly, formatSEK } from "@/lib/utils";
 import { pick } from "@/lib/i18n";
 import { useLocale } from "@/hooks/use-locale";
@@ -8,18 +8,33 @@ import { useLocale } from "@/hooks/use-locale";
 export function AffordabilityWizard() {
   const [step, setStep] = useState(1);
   const [income, setIncome] = useState(45000);
-  const [savings, setSavings] = useState(350000);
+  const [downPayment, setDownPayment] = useState(350000);
   const locale = useLocale();
+
+  useEffect(() => {
+    fetch("/api/profile")
+      .then((res) => (res.ok ? res.json() : Promise.resolve({ profile: null })))
+      .then((data) => {
+        const profile = data?.profile;
+        if (!profile) return;
+        if (typeof profile.monthly_income === "number") setIncome(profile.monthly_income);
+        if (typeof profile.preferred_down_payment === "number") {
+          setDownPayment(profile.preferred_down_payment);
+          return;
+        }
+        if (typeof profile.savings === "number") setDownPayment(profile.savings);
+      });
+  }, []);
 
   const result = useMemo(() => {
     const safeMonthly = income * 0.35;
     const maxLoan = safeMonthly * 170;
-    const maxHomePrice = maxLoan + savings;
+    const maxHomePrice = maxLoan + downPayment;
     return {
       monthlyPayment: Math.round(safeMonthly),
       maxHomePrice: Math.round(maxHomePrice)
     };
-  }, [income, savings]);
+  }, [income, downPayment]);
 
   return (
     <section className="card mx-auto max-w-3xl space-y-5 p-6 sm:p-8">
@@ -36,8 +51,8 @@ export function AffordabilityWizard() {
 
       {step === 2 ? (
         <label className="space-y-2 text-sm font-semibold text-[#3b322c]">
-          {pick(locale, { sv: "Sparkapital till kontantinsats (SEK)", ar: "المدخرات", fi: "Säästöt käsirahaan", bcs: "Ušteđevina", en: "Savings for down payment (SEK)" })}
-          <input type="number" className="input-shell" value={savings} onChange={(e) => setSavings(Number(e.target.value))} />
+          {pick(locale, { sv: "Kontantinsats du vill använda (SEK)", ar: "الدفعة المقدمة التي تريد استخدامها", fi: "Käsiraha, jota haluat käyttää (SEK)", bcs: "Učešće koje želiš koristiti (SEK)", en: "Down payment you want to use (SEK)" })}
+          <input type="number" className="input-shell" value={downPayment} onChange={(e) => setDownPayment(Number(e.target.value))} />
         </label>
       ) : null}
 

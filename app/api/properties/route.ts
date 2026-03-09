@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createClient } from "@/lib/supabase/server";
+import { getAuthContext } from "@/lib/auth";
 import { checkRateLimit } from "@/lib/rate-limit";
 import { createPropertySchema } from "@/lib/validators";
 import { estimateMonthlyCost, slugify } from "@/lib/utils";
@@ -9,7 +9,11 @@ export async function GET(req: NextRequest) {
   if (!checkRateLimit(ip, 90)) return NextResponse.json({ error: "Rate limit exceeded" }, { status: 429 });
 
   const status = req.nextUrl.searchParams.get("status") ?? "approved";
-  const supabase = await createClient();
+  const { supabase, role } = await getAuthContext();
+  if (status !== "approved" && role !== "admin") {
+    return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+  }
+
   const { data, error } = await supabase
     .from("properties")
     .select("id, title, city, status")
@@ -31,15 +35,18 @@ export async function POST(req: NextRequest) {
 
   const payload = parsed.data;
   const { image_urls, ...propertyValues } = payload;
-  const supabase = await createClient();
-  const { data: auth } = await supabase.auth.getUser();
-  if (!auth.user) return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
+  const { supabase, user, role } = await getAuthContext();
+  if (!user) return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
 
   const { data: agentRow } = await supabase
     .from("agents")
     .select("id")
-    .eq("email", auth.user.email ?? "")
+    .eq("email", user.email ?? "")
     .maybeSingle();
+
+  if (role !== "admin" && !agentRow?.id) {
+    return NextResponse.json({ error: "Agent access required" }, { status: 403 });
+  }
 
   const { data, error } = await supabase
     .from("properties")

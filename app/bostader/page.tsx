@@ -1,9 +1,11 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { EmptyState } from "@/components/list-state";
 import { PropertyCard } from "@/components/property-card";
 import { SearchFilters } from "@/components/search-filters";
 import { getProperties } from "@/lib/queries/properties";
 import { getServerLocale, pick } from "@/lib/i18n";
+import { createClient } from "@/lib/supabase/server";
 
 interface PageProps {
   searchParams: Promise<Record<string, string | string[] | undefined>>;
@@ -25,12 +27,57 @@ export default async function ListingsPage({ searchParams }: PageProps) {
   const params = await searchParams;
   const page = parseNum(params.page) ?? 1;
 
+  let defaultProfile: { city: string; price_max: number | null; monthly_cost_max: number | null } | null = null;
+  try {
+    const supabase = await createClient();
+    const { data: auth } = await supabase.auth.getUser();
+    if (auth.user?.id) {
+      const { data } = await supabase
+        .from("search_profiles")
+        .select("city, price_max, monthly_cost_max")
+        .eq("user_id", auth.user.id)
+        .eq("is_default", true)
+        .maybeSingle();
+      defaultProfile = data ?? null;
+    }
+  } catch {
+    defaultProfile = null;
+  }
+
+  if (defaultProfile) {
+    const query = new URLSearchParams();
+    Object.entries(params).forEach(([key, value]) => {
+      if (typeof value === "string") query.set(key, value);
+    });
+
+    let changed = false;
+    if (!query.get("city") && defaultProfile.city) {
+      query.set("city", defaultProfile.city);
+      changed = true;
+    }
+    if (!query.get("priceMax") && defaultProfile.price_max) {
+      query.set("priceMax", String(defaultProfile.price_max));
+      changed = true;
+    }
+    if (!query.get("monthlyCostMax") && defaultProfile.monthly_cost_max) {
+      query.set("monthlyCostMax", String(defaultProfile.monthly_cost_max));
+      changed = true;
+    }
+    if (changed) {
+      redirect(`/bostader?${query.toString()}`);
+    }
+  }
+
+  const city = parseString(params.city) ?? defaultProfile?.city;
+  const priceMax = parseNum(params.priceMax) ?? (defaultProfile?.price_max ?? undefined);
+  const monthlyCostMax = parseNum(params.monthlyCostMax) ?? (defaultProfile?.monthly_cost_max ?? undefined);
+
   const result = await getProperties({
-    city: parseString(params.city),
+    city,
     area: parseString(params.area),
     priceMin: parseNum(params.priceMin),
-    priceMax: parseNum(params.priceMax),
-    monthlyCostMax: parseNum(params.monthlyCostMax),
+    priceMax,
+    monthlyCostMax,
     roomsMin: parseNum(params.roomsMin),
     sizeMin: parseNum(params.sizeMin),
     propertyType: parseString(params.propertyType),
