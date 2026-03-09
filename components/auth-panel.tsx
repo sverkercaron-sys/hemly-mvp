@@ -13,6 +13,7 @@ export function AuthPanel() {
   const [mode, setMode] = useState<"signin" | "signup">("signin");
   const [status, setStatus] = useState("");
   const [busy, setBusy] = useState(false);
+  const [oauthBusy, setOauthBusy] = useState(false);
 
   async function onSubmit(event: FormEvent) {
     event.preventDefault();
@@ -52,6 +53,21 @@ export function AuthPanel() {
     );
   }
 
+  async function onGoogleAuth() {
+    setOauthBusy(true);
+    setStatus("");
+    const supabase = createClient();
+    const redirectTo = `${window.location.origin}/auth/callback`;
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: { redirectTo }
+    });
+    if (error) {
+      setStatus(error.message);
+      setOauthBusy(false);
+    }
+  }
+
   return (
     <form onSubmit={onSubmit} className="card mx-auto grid max-w-xl gap-3 p-6">
       <h1 className="section-title text-3xl">
@@ -75,6 +91,12 @@ export function AuthPanel() {
             : pick(locale, { sv: "Skapa konto", ar: "إنشاء حساب", fi: "Luo tili", bcs: "Kreiraj nalog", en: "Create account" })}
       </button>
 
+      <button type="button" className="button-secondary" onClick={onGoogleAuth} disabled={oauthBusy}>
+        {oauthBusy
+          ? pick(locale, { sv: "Vänta...", ar: "انتظر...", fi: "Odota...", bcs: "Sačekaj...", en: "Please wait..." })
+          : pick(locale, { sv: "Fortsätt med Google", ar: "المتابعة عبر Google", fi: "Jatka Googlella", bcs: "Nastavi s Google", en: "Continue with Google" })}
+      </button>
+
       <button type="button" className="button-secondary" onClick={() => setMode(mode === "signin" ? "signup" : "signin")}>
         {mode === "signin"
           ? pick(locale, { sv: "Har du inget konto? Skapa ett", ar: "ليس لديك حساب؟ أنشئ حسابًا", fi: "Ei tiliä? Luo tili", bcs: "Nemaš nalog? Kreiraj", en: "No account? Create one" })
@@ -85,4 +107,3 @@ export function AuthPanel() {
     </form>
   );
 }
-
