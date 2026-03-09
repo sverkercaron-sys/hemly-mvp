@@ -10,10 +10,12 @@ const descriptions = [
 ];
 
 const images = [
-  "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600",
-  "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1600",
-  "https://images.unsplash.com/photo-1572120360610-d971b9d7767c?w=1600",
-  "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=1600"
+  "/images/listings/house-1.svg",
+  "/images/listings/house-2.svg",
+  "/images/listings/house-3.svg",
+  "/images/listings/house-4.svg",
+  "/images/listings/house-5.svg",
+  "/images/listings/house-6.svg"
 ];
 
 function random(min: number, max: number) {

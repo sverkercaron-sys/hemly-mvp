@@ -81,10 +81,12 @@ insert into public.property_images (property_id, url, image_order)
 select
   i.id,
   (array[
-    'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600',
-    'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1600',
-    'https://images.unsplash.com/photo-1572120360610-d971b9d7767c?w=1600',
-    'https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=1600'
-  ])[1 + (random() * 3)::int],
+    '/images/listings/house-1.svg',
+    '/images/listings/house-2.svg',
+    '/images/listings/house-3.svg',
+    '/images/listings/house-4.svg',
+    '/images/listings/house-5.svg',
+    '/images/listings/house-6.svg'
+  ])[1 + (random() * 5)::int],
   0
 from inserted i;

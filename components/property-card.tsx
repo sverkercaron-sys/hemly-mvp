@@ -5,7 +5,7 @@ import { formatMonthly, formatSEK } from "@/lib/utils";
 import { toOptimizedImageUrl } from "@/lib/images";
 
 export function PropertyCard({ property }: { property: Property }) {
-  const cover = toOptimizedImageUrl(property.images?.[0]?.url ?? "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1200", 900, 65);
+  const cover = toOptimizedImageUrl(property.images?.[0]?.url ?? "/images/listings/house-1.svg", 900, 65);
 
   return (
     <article className="card overflow-hidden">
