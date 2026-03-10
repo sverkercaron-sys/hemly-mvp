@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, Calculator, Home, MapPinned } from "lucide-react";
 import { getServerLocale, pick } from "@/lib/i18n";
 
@@ -47,34 +48,57 @@ export default async function HomePage() {
   return (
     <section className="space-y-8">
       <div className="soft-panel overflow-hidden p-7 sm:p-12">
-        <div className="max-w-4xl space-y-6">
-          <span className="eyebrow-chip">Hemly Marketplace</span>
-          <h1 className="section-title text-4xl sm:text-6xl">
-            {pick(locale, {
-              sv: "Hitta hem. Enkelt.",
-              ar: "اعثر على منزلك. ببساطة.",
-              fi: "Löydä koti. Selkeästi.",
-              bcs: "Pronađi dom. Jednostavno.",
-              en: "Find home. Clearly."
-            })}
-          </h1>
-          <p className="max-w-3xl text-base text-[var(--muted)] sm:text-xl">
-            {pick(locale, {
-              sv: "En premium bostadsmarknadsplats med modern sökning, boendekalkyl, kartutforskning och modererade annonser.",
-              ar: "منصة عقارية متميزة تجمع البحث الحديث وحساب القدرة الشرائية واستكشاف الخريطة والإعلانات المراجعة.",
-              fi: "Premium-asuntomarkkinapaikka modernilla haulla, budjettinäkymällä, kartalla ja moderoidulla sisällöllä.",
-              bcs: "Premium platforma za nekretnine sa modernom pretragom, kalkulatorom pristupačnosti, mapom i moderacijom oglasa.",
-              en: "A premium property marketplace with modern search, monthly affordability insights, map exploration, and trusted listing moderation."
-            })}
-          </p>
-          <div className="flex flex-wrap gap-3">
-            <Link href="/bostader" className="button-primary px-6 py-3">
-              {pick(locale, { sv: "Utforska bostäder", ar: "استعرض المنازل", fi: "Selaa koteja", bcs: "Istraži nekretnine", en: "Explore Listings" })}
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
-            <Link href="/affordability" className="button-secondary px-6 py-3">
-              {pick(locale, { sv: "Starta kalkyl", ar: "ابدأ الحساب", fi: "Aloita laskelma", bcs: "Pokreni kalkulator", en: "Start Affordability" })}
-            </Link>
+        <div className="grid items-center gap-8 lg:grid-cols-[1.15fr_0.85fr]">
+          <div className="space-y-6">
+            <span className="eyebrow-chip">Hemly Marketplace</span>
+            <h1 className="section-title text-4xl sm:text-6xl">
+              {pick(locale, {
+                sv: "Hitta hem. Enkelt.",
+                ar: "اعثر على منزلك. ببساطة.",
+                fi: "Löydä koti. Selkeästi.",
+                bcs: "Pronađi dom. Jednostavno.",
+                en: "Find home. Clearly."
+              })}
+            </h1>
+            <p className="max-w-3xl text-base text-[var(--muted)] sm:text-xl">
+              {pick(locale, {
+                sv: "En premium bostadsmarknadsplats med modern sökning, boendekalkyl, kartutforskning och modererade annonser.",
+                ar: "منصة عقارية متميزة تجمع البحث الحديث وحساب القدرة الشرائية واستكشاف الخريطة والإعلانات المراجعة.",
+                fi: "Premium-asuntomarkkinapaikka modernilla haulla, budjettinäkymällä, kartalla ja moderoidulla sisällöllä.",
+                bcs: "Premium platforma za nekretnine sa modernom pretragom, kalkulatorom pristupačnosti, mapom i moderacijom oglasa.",
+                en: "A premium property marketplace with modern search, monthly affordability insights, map exploration, and trusted listing moderation."
+              })}
+            </p>
+            <div className="flex flex-wrap gap-3">
+              <Link href="/bostader" className="button-primary px-6 py-3">
+                {pick(locale, { sv: "Utforska bostäder", ar: "استعرض المنازل", fi: "Selaa koteja", bcs: "Istraži nekretnine", en: "Explore Listings" })}
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+              <Link href="/affordability" className="button-secondary px-6 py-3">
+                {pick(locale, { sv: "Starta kalkyl", ar: "ابدأ الحساب", fi: "Aloita laskelma", bcs: "Pokreni kalkulator", en: "Start Affordability" })}
+              </Link>
+            </div>
+          </div>
+
+          <div className="relative h-64 overflow-hidden rounded-3xl border border-[var(--line)] sm:h-80 lg:h-[28rem]">
+            <Image
+              src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1400&q=80"
+              alt="Drömboende"
+              fill
+              className="object-cover"
+              priority
+            />
+            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/65 to-transparent p-5">
+              <p className="text-sm font-semibold text-white">
+                {pick(locale, {
+                  sv: "Ditt nästa drömboende väntar",
+                  ar: "منزلك الحلم القادم بانتظارك",
+                  fi: "Seuraava unelmakotisi odottaa",
+                  bcs: "Tvoj sljedeći dom iz snova te čeka",
+                  en: "Your next dream home is waiting"
+                })}
+              </p>
+            </div>
           </div>
         </div>
       </div>
