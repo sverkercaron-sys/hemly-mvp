@@ -3,6 +3,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { LeadForm } from "@/components/lead-form";
 import { MortgageCalculator } from "@/components/mortgage-calculator";
+import { FavoriteButton } from "@/components/favorite-button";
 import { getPropertyBySlug } from "@/lib/queries/properties";
 import { formatMonthly, formatSEK } from "@/lib/utils";
 import { getServerLocale, pick } from "@/lib/i18n";
@@ -50,6 +51,7 @@ export default async function PropertyPage({ params }: Props) {
         <div className="mt-3 flex flex-wrap gap-5">
           <p className="text-5xl font-semibold tracking-tight text-[#1d1d1f]">{formatSEK(property.price)}</p>
           <p className="text-lg font-medium text-[var(--muted)]">{formatMonthly(property.monthly_cost_estimate)}</p>
+          <FavoriteButton propertyId={property.id} />
         </div>
       </div>
 

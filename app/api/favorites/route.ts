@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
   const { property_id } = (await req.json()) as { property_id?: string };
   if (!property_id) return NextResponse.json({ error: "property_id required" }, { status: 400 });
 
-  const { error } = await supabase.from("favorites").insert({ user_id: userId, property_id });
+  const { error } = await supabase.from("favorites").upsert({ user_id: userId, property_id }, { onConflict: "user_id,property_id", ignoreDuplicates: true });
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
   return NextResponse.json({ ok: true }, { status: 201 });
 }

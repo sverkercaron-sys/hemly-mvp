@@ -14,6 +14,7 @@ export async function SiteHeader() {
       href: "/affordability",
       label: pick(locale, { sv: "Boendekalkyl", ar: "القدرة الشرائية", fi: "Budjetti", bcs: "Pristupačnost", en: "Affordability" })
     },
+    { href: "/notifications", label: pick(locale, { sv: "Notiser", ar: "الإشعارات", fi: "Ilmoitukset", bcs: "Obavijesti", en: "Alerts" }) },
     { href: "/favorites", label: pick(locale, { sv: "Favoriter", ar: "المفضلة", fi: "Suosikit", bcs: "Favoriti", en: "Favorites" }) },
     { href: "/dashboard/agent", label: pick(locale, { sv: "Mäklare", ar: "الوكيل", fi: "Välittäjä", bcs: "Agent", en: "Agent" }) },
     { href: "/dashboard/admin", label: pick(locale, { sv: "Admin", ar: "المشرف", fi: "Ylläpito", bcs: "Admin", en: "Admin" }) }
@@ -51,6 +52,9 @@ export async function SiteHeader() {
           </Link>
           <Link href="/map" className="button-secondary px-3 py-1.5">
             {pick(locale, { sv: "Karta", ar: "الخريطة", fi: "Kartta", bcs: "Mapa", en: "Map" })}
+          </Link>
+          <Link href="/notifications" className="button-secondary px-3 py-1.5">
+            {pick(locale, { sv: "Notiser", ar: "الإشعارات", fi: "Ilmoitukset", bcs: "Obavijesti", en: "Alerts" })}
           </Link>
           <Link href="/auth" className="button-secondary px-3 py-1.5">
             {pick(locale, { sv: "Login", ar: "دخول", fi: "Login", bcs: "Login", en: "Login" })}
