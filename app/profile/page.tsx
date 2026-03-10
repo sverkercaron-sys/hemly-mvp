@@ -20,6 +20,15 @@ export default async function ProfilePage() {
 
       <ProfileSettingsPanel />
 
+      <div className="card flex flex-wrap items-center gap-3 p-4 text-sm">
+        <Link href="/favorites" className="button-secondary">
+          {pick(locale, { sv: "Favoriter", ar: "المفضلة", fi: "Suosikit", bcs: "Favoriti", en: "Favorites" })}
+        </Link>
+        <Link href="/notifications" className="button-secondary">
+          {pick(locale, { sv: "Notiser", ar: "الإشعارات", fi: "Ilmoitukset", bcs: "Obavijesti", en: "Notifications" })}
+        </Link>
+      </div>
+
       <div className="space-y-2">
         <h2 className="text-xl font-semibold text-[#1d1d1f]">{pick(locale, { sv: "Sökprofil", ar: "ملف البحث", fi: "Hakuprofiili", bcs: "Profil pretrage", en: "Search profile" })}</h2>
         <SearchProfilesPanel />

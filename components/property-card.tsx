@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { FavoriteButton } from "@/components/favorite-button";
 import { Property } from "@/lib/types";
 import { formatMonthly, formatSEK } from "@/lib/utils";
 import { toOptimizedImageUrl } from "@/lib/images";
@@ -31,9 +32,12 @@ export async function PropertyCard({ property }: { property: Property }) {
           <p className="text-base font-medium text-[var(--muted)]">{formatMonthly(property.monthly_cost_estimate)}</p>
         </div>
 
-        <Link href={`/bostad/${property.slug}`} className="button-secondary w-full">
-          {pick(locale, { sv: "Visa bostad", ar: "عرض العقار", fi: "Näytä kohde", bcs: "Pogledaj", en: "View property" })}
-        </Link>
+        <div className="flex flex-col gap-2">
+          <FavoriteButton propertyId={property.id} />
+          <Link href={`/bostad/${property.slug}`} className="button-secondary w-full">
+            {pick(locale, { sv: "Visa bostad", ar: "عرض العقار", fi: "Näytä kohde", bcs: "Pogledaj", en: "View property" })}
+          </Link>
+        </div>
       </div>
     </article>
   );
